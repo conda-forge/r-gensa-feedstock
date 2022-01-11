@@ -1,5 +1,4 @@
-{% set version = "1.1.7" %}
-
+{% set version = '1.1.7' %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -8,35 +7,35 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  fn: GenSA_1.1.7.tar.gz
-  url: https://cran.r-project.org/src/contrib/GenSA_1.1.7.tar.gz
+  url:
+    - {{ cran_mirror }}/src/contrib/GenSA_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/GenSA/GenSA_{{ version }}.tar.gz
   sha256: 9d99d3d0a4b7770c3c3a6de44206811272d78ab94481713a8c369f7d6ae7b80f
 
 build:
-  number: 1005
-  # does not build on win
-  skip: true  # [win]
+  merge_build_host: True  # [win]
+  number: 1006
   rpaths:
     - lib/R/lib/
     - lib/
 
 requirements:
   build:
-    - {{ compiler('c') }}          # [not win]
-    - {{ compiler('cxx') }}        # [not win]
-    - {{ compiler('fortran') }}    # [not win]
-    - {{ compiler('m2w64_c') }}          # [win]
-    - {{ compiler('m2w64_cxx') }}          # [win]
-    - {{ compiler('m2w64_fortran') }}          # [win]
-    - {{ posix }}filesystem          # [win]
+    - {{ compiler('c') }}              # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ compiler('cxx') }}            # [not win]
+    - {{ compiler('m2w64_cxx') }}      # [win]
+    - {{ posix }}filesystem        # [win]
     - {{ posix }}make
-
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+    - cross-r-base {{ r_base }}    # [build_platform != target_platform]
   host:
     - r-base
-
   run:
     - r-base
-    - {{ native }}gcc-libs           # [win]
+    - {{ native }}gcc-libs         # [win]
 
 test:
   commands:
@@ -46,15 +45,30 @@ test:
 about:
   home: https://CRAN.R-project.org/package=GenSA
   license: GPL-2.0-only
-  summary: Performs search for global minimum of a very complex non-linear objective function with a very large number of optima.
+  summary: Performs search for global minimum of a very complex non-linear objective function
+    with a very large number of optima.
   license_family: GPL2
-
   license_file:
-    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2
+    - '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2'
+
 extra:
   recipe-maintainers:
     - conda-forge/r
-    - dpryan79
-    - johanneskoester
     - lucapinello
-    - bgruening
+
+# Package: GenSA
+# Type: Package
+# Title: Generalized Simulated Annealing
+# Version: 1.1.7
+# Date: 2018-01-15
+# Author: Sylvain Gubian, Yang Xiang, Brian Suomela, Julia Hoeng, PMP SA.
+# Maintainer: Sylvain Gubian <DL.RSupport@pmi.com>
+# Depends: R (>= 2.12.0)
+# Description: Performs search for global minimum of a very complex non-linear objective function with a very large number of optima.
+# License: GPL-2
+# LazyLoad: yes
+# NeedsCompilation: yes
+# Repository: CRAN
+# RoxygenNote: 5.0.1
+# Packaged: 2018-01-17 07:56:50 UTC; sgubian
+# Date/Publication: 2018-01-17 15:02:35 UTC
