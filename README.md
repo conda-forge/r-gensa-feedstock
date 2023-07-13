@@ -3,6 +3,7 @@ About r-gensa-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/r-gensa-feedstock/blob/main/LICENSE.txt)
 
+
 About r-gensa
 -------------
 
@@ -11,6 +12,7 @@ Home: https://CRAN.R-project.org/package=GenSA
 Package license: GPL-2.0-only
 
 Summary: Performs search for global minimum of a very complex non-linear objective function with a very large number of optima.
+
 About r-gensa
 -------------
 
