@@ -1,4 +1,4 @@
-{% set version = "1.1.10.1" %}
+{% set version = "1.1.12" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,7 +10,7 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/GenSA_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/GenSA/GenSA_{{ version }}.tar.gz
-  sha256: 9093384941b5626aae2acf4835b591875193a6000d1f0b212abeaf682652949b
+  sha256: 739b6eb5c278b7d203d005c675ac3e37c656388ee55f22546a8030062b04be54
 
 build:
   merge_build_host: true  # [win]
