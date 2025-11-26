@@ -1,4 +1,4 @@
-{% set version = "1.1.14.1" %}
+{% set version = "1.1.15" %}
 {% set posix = 'm2-' if win else '' %}
 
 package:
@@ -9,10 +9,10 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/GenSA_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/GenSA/GenSA_{{ version }}.tar.gz
-  sha256: 2fdd54cbd670c9eaba304547d8c44fc51578cb317adb9788a0fc82f58ace377f
+  sha256: 68970dc3b463986b5b7130acbd42a5ae5a85835d004fb54f81b3ef5c2fccf925
 
 build:
-  number: 1
+  number: 0
   rpaths:
     - lib/R/lib/
     - lib/
